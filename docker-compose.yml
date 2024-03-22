@@ -1,0 +1,16 @@
+version: "3.4"
+
+services:
+  odasrv:
+    image: ghcr.io/frantjc/odasrv:${ODAMEX_VERSION:-10.4.0}
+    build:
+      context: .
+      args: |
+        ODAMEX_VERSION=${ODAMEX_VERSION:-10.4.0}
+    command:
+      - -config
+      - /usr/local/etc/odamex/odasrv.cfg
+    ports:
+      - 10666:10666/udp
+    volumes:
+      - ${ODASRV_CFG:-./odasrv.cfg}:/usr/local/etc/odamex/odasrv.cfg
