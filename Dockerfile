@@ -8,13 +8,13 @@ RUN apt-get install -y --no-install-recommends \
         deutex \
         zlib1g-dev
 
-ARG ODASRV_VERSION=10.4.0
-ENV ODASRV_VERSION=${ODASRV_VERSION}
+ARG ODAMEX_VERSION=10.4.0
+ENV ODAMEX_VERSION=${ODAMEX_VERSION}
 
-ADD https://github.com/odamex/odamex/releases/download/${ODASRV_VERSION}/odamex-src-${ODASRV_VERSION}.tar.gz /src/
+ADD https://github.com/odamex/odamex/releases/download/${ODAMEX_VERSION}/odamex-src-${ODAMEX_VERSION}.tar.gz /src/
 RUN cd /src \
-    && tar -zxvf /src/odamex-src-${ODASRV_VERSION}.tar.gz \
-    && cd /src/odamex-src-${ODASRV_VERSION} \
+    && tar -zxvf /src/odamex-src-${ODAMEX_VERSION}.tar.gz \
+    && cd /src/odamex-src-${ODAMEX_VERSION} \
     && cmake \
         -DBUILD_CLIENT=0 \
         -DBUILD_SERVER=1 \
