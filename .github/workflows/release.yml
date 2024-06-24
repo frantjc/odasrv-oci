@@ -5,7 +5,7 @@ on:
       version:
         description: Odamex version.
         required: true
-        default: 10.4.0
+        default: 10.5.0
 permissions:
   packages: write
 jobs:
