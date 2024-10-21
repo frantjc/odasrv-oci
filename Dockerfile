@@ -8,7 +8,7 @@ RUN apt-get install -y --no-install-recommends \
         deutex \
         zlib1g-dev
 
-ARG ODAMEX_VERSION=10.4.0
+ARG ODAMEX_VERSION=10.6.0
 ENV ODAMEX_VERSION=${ODAMEX_VERSION}
 
 ADD https://github.com/odamex/odamex/releases/download/${ODAMEX_VERSION}/odamex-src-${ODAMEX_VERSION}.tar.gz /src/
