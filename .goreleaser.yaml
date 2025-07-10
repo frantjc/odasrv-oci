@@ -1,3 +1,4 @@
+version: 2
 # Since this is just a stub,
 # cleverly skip the build.
 builds:
