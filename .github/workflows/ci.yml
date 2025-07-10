@@ -20,4 +20,4 @@ jobs:
         with:
           load: true
           build-args: |
-            ODAMEX_VERSION=${{ inputs.version }}
+            ODAMEX_VERSION=${{ inputs.version || "11.0.0" }}
