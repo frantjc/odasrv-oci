@@ -1,26 +1,29 @@
 name: Release
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: Odamex version.
-        required: true
-        default: 10.6.0
+  push:
+    tags:
+      # Rough semantic version regexp to only create releases
+      # on complete semantic versions e.g. v1.0.0, but not v1.
+      - v[0-9]+.[0-9]+.[0-9]+*
 permissions:
+  contents: read
+  id-token: write
+  attestations: write
   packages: write
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: docker/login-action@v3 
+      - uses: actions/checkout@v4
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - uses: docker/build-push-action@v6
+          fetch-depth: 0
+      - uses: sigstore/cosign-installer@v3.9.1
+      - uses: anchore/sbom-action/download-syft@v0.20.2 
+      - uses: goreleaser/goreleaser-action@v6
         with:
-          push: true
-          build-args: |
-            ODAMEX_VERSION=${{ inputs.version }}
-          tags: |
-            ghcr.io/${{ github.repository_owner }}/odasrv:${{ inputs.version }}
+          args: release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - uses: actions/attest-build-provenance@v2
+        with:
+          subject-checksums: dist/checksums.txt

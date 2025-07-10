@@ -1,5 +1,5 @@
 FROM debian:stable-slim
-ARG ODAMEX_VERSION=10.6.0
+ARG ODAMEX_VERSION=11.0.0
 ENV ODAMEX_VERSION=${ODAMEX_VERSION}
 ADD https://github.com/odamex/odamex/releases/download/${ODAMEX_VERSION}/odamex-src-${ODAMEX_VERSION}.tar.gz /src/
 RUN apt-get update -y \

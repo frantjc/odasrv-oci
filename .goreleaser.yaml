@@ -1,0 +1,49 @@
+# Since this is just a stub,
+# cleverly skip the build.
+builds:
+  - goos:
+      - linux
+    goarch:
+      - amd64
+    ignore:
+      - goos: linux
+        goarch: amd64
+checksum:
+  name_template: checksums.txt
+source:
+  enabled: true
+sboms:
+  - artifacts: source
+release:
+  prerelease: auto
+  skip_upload: true
+changelog:
+  use: github
+  filters:
+    exclude:
+      - merge conflict
+      - Merge pull request
+      - Merge remote-tracking branch
+      - Merge branch
+dockers:
+  - image_templates:
+      - ghcr.io/frantjc/odasrv:{{ .Version }}
+      - ghcr.io/frantjc/odasrv:{{ .Major }}.{{ .Minor }}
+      - ghcr.io/frantjc/odasrv:{{ .Major }}
+      - ghcr.io/frantjc/odasrv:latest
+    build_flag_templates:
+      - --pull
+      - --label=org.opencontainers.image.created={{ .Date }}
+      - --label=org.opencontainers.image.title={{ .ProjectName }}
+      - --label=org.opencontainers.image.revision={{ .FullCommit }}
+      - --label=org.opencontainers.image.version={{ .Version }}
+      - --build-arg=ODAMEX_VERSION={{ .Major }}.{{ .Minor }}.{{ .Patch }}
+      - --platform=linux/amd64
+docker_signs:
+  - cmd: cosign
+    artifacts: images
+    args:
+      - "sign"
+      - "${artifact}"
+      - "--yes"
+    output: true
