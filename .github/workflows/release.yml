@@ -6,7 +6,7 @@ on:
         description: Odamex version.
         required: true
         default: stable
-      version:
+      source:
         description: Odamex source.
         required: true
         default: branch
