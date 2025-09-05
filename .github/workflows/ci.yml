@@ -23,6 +23,6 @@ jobs:
       - uses: docker/build-push-action@v6
         with:
           load: true
-          file: ${{ inputs.source }}.Dockerfile
+          file: ${{ inputs.source || 'branch' }}.Dockerfile
           build-args: |
-            ODAMEX_VERSION=${{ inputs.version }}
+            ODAMEX_VERSION=${{ inputs.version || 'stable' }}
