@@ -19,6 +19,7 @@ RUN apt-get update -y \
         build-essential \
         ca-certificates \
         cmake \
+        deutex \
         git \
         zlib1g-dev \
         libzstd-dev \
@@ -41,6 +42,7 @@ RUN apt-get update -y \
     && apt-get remove -y \
         build-essential \
         cmake \
+        deutex \
         zlib1g-dev \
         libzstd-dev \
     && apt-get install -y --no-install-recommends \
