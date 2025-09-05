@@ -1,10 +1,11 @@
 services:
   odasrv:
-    image: ghcr.io/frantjc/odasrv:${ODAMEX_VERSION:-11.0.0}
+    image: ghcr.io/frantjc/odasrv:${ODAMEX_VERSION:-stable}
     build:
       context: .
+      dockerfile: ${ODAMEX_SRC:-branch}.Dockerfile
       args:
-        ODAMEX_VERSION: ${ODAMEX_VERSION:-11.0.0}
+        ODAMEX_VERSION: ${ODAMEX_VERSION:-stable}
     command:
       - -config
       - /usr/local/etc/odamex/odasrv.cfg

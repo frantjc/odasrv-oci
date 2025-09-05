@@ -5,7 +5,11 @@ on:
       version:
         description: Odamex version.
         required: true
-        default: 11.0.0
+        default: stable
+      source:
+        description: Odamex source.
+        required: true
+        default: branch
   push:
     branches:
       - main
@@ -19,5 +23,6 @@ jobs:
       - uses: docker/build-push-action@v6
         with:
           load: true
+          dockerfile: ${{ inputs.source }}.Dockerfile
           build-args: |
-            ODAMEX_VERSION=${{ inputs.version || '11.0.0' }}
+            ODAMEX_VERSION=${{ inputs.version }}

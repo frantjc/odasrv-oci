@@ -43,7 +43,7 @@ spec:
             name: odamex
       containers:
         - name: odasrv
-          image: ghcr.io/frantjc/odasrv:11.0.0
+          image: ghcr.io/frantjc/odasrv:stable
           args:
             - -config
             - /usr/local/etc/odamex/odasrv.cfg
