@@ -13,7 +13,7 @@ RUN apt-get update -y \
 FROM debian:stable-slim
 ARG ODAMEX_VERSION=11.1.0
 ENV ODAMEX_VERSION=${ODAMEX_VERSION}
-COPY --from=branch /src/odamex-src-${ODAMEX_VERSION} /src/odamex-src-${ODAMEX_VERSION}
+COPY --from=tag /src/odamex-src-${ODAMEX_VERSION} /src/odamex-src-${ODAMEX_VERSION}
 RUN apt-get update -y \
     && apt-get install -y --no-install-recommends \
         build-essential \
